@@ -61,6 +61,23 @@
                             </div>
                         </div>
 
+                        {{-- captcha --}}
+                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Captcha</label>
+                            {{-- $errors从哪来的? --}}
+
+                            <div class="col-md-6">
+                                <input id="captcha" class="form-control" name="captcha" required>
+								<img class="thumbnail captcha" src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/flat?'+Math.random();" title="refresh">
+
+                                @if ($errors->has('captcha'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('captcha') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
