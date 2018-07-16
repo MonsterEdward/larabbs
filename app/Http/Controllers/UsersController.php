@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use App\HTTP\Requests\UserRequest;
+
 class UsersController extends Controller
 {
     public function show(User $user) {
@@ -14,5 +16,11 @@ class UsersController extends Controller
 
     public function edit(User $user) {
         return view('users.edit', compact('user'));
+    }
+
+    public function update(UserRequest $request, User $user) {//不使用validator而使用FormRequest
+        $user->update($request->all());
+        return redirect()->route('users.show', $user->id)->with('success', 'Update your info success');
+
     }
 }
