@@ -8,6 +8,8 @@ use App\User;
 
 use App\HTTP\Requests\UserRequest;
 
+use App\Handlers\ImageUploadHandler;
+
 class UsersController extends Controller
 {
     public function show(User $user) {
@@ -18,8 +20,20 @@ class UsersController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(UserRequest $request, User $user) {//不使用validator而使用FormRequest
-        $user->update($request->all());
+    public function update(UserRequest $request, ImageUploadHandler $uploader, User $user) {//不使用validator而使用FormRequest
+        //获取上传文件信息 $request->file('avatar')或$request->avatar
+        $data = $request->all();
+
+        if($request->avatar) {
+            $result = $uploader->save($request->avatar, 'avatar', $user->id, 361);
+            if($request) {
+                $data['avatar'] = $result['path'];
+            }
+        }
+
+        //$user->update($request->all());
+        $user->update($data);
+
         return redirect()->route('users.show', $user->id)->with('success', 'Update your info success');
 
     }

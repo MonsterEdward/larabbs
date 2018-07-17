@@ -10,16 +10,19 @@
 			<div class="panel-body">
 				<div class="media">
 					<div align="center">
-						<img class="thumbnail img-responsive" src="https://lihuang.monsteredward.com/wp-content/uploads/2018/06/6739ba046017babed5850373266eaa52ab450cc041fea-zfHSvS_fw658.jpg" width="300px" height="300px">
+						{{-- <img class="thumbnail img-responsive" src="https://lihuang.monsteredward.com/wp-content/uploads/2018/06/6739ba046017babed5850373266eaa52ab450cc041fea-zfHSvS_fw658.jpg" width="300px" height="300px"> --}}
+						<img class="thumbnail img-responsive" src="{{ $user->avatar }}" width="300px" height="300px">
 					</div>
 
 					<div class="media-body">
 						<hr>
 						<h4><strong>brief introduction</strong></h4>
-						<p>If the dream is big enough, the fact don't count</p>
+						{{-- <p>If the dream is big enough, the fact don't count</p> --}}
+						<p>{{ $user->introduction }}</p>
 						<hr>
 						<h4><strong>resgited in</strong></h4>
-						<p>July 4th, 2018</p>
+						{{-- <p>July 4th, 2018</p> --}}
+						<p>{{ $user->created_at->diffForHumans() }}</p>
 					</div>
 				</div>
 			</div>

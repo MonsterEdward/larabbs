@@ -28,7 +28,19 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' . Auth::id(),
 			'email' => 'required|email',
-			'introduction' => 'max:80'
+			'introduction' => 'max:80',
+			'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200'
         ];
     }
+
+	public function messages() {
+		return [
+			'name.require' => 'This name has been taken',
+			'name.regex' => 'U can only use alphabet, num, _, -',
+			'name.between' => 'The name must be between 3 - 25',
+			'name.required' => 'The name can\'t be null',
+			'avatar.mimes' => 'Must be jpeg, bmp, png, gif',
+			'avatar.dimensions' => 'Width and height must be 200px'
+		];
+	}
 }
