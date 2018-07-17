@@ -12,16 +12,22 @@ use App\Handlers\ImageUploadHandler;
 
 class UsersController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+
     public function show(User $user) {
         return view('users.show', compact('user'));
     }
 
     public function edit(User $user) {
+		$this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user) {//不使用validator而使用FormRequest
-        //获取上传文件信息 $request->file('avatar')或$request->avatar
+        $this->authorize('update', $user);
+		//获取上传文件信息 $request->file('avatar')或$request->avatar
         $data = $request->all();
 
         if($request->avatar) {
