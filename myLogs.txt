@@ -1,0 +1,6 @@
+# vagrant provision && vagrant reload
+# composer config -g repo.http_porxy composer http://
+# git config --global http.proxy http://
+
+// routes/web.php中, Auth::routes()等同于那么多条路由? why?! 在config目录下app.php找出Auth aliases. 从来没读过框架, 所以很多不知道怎么回事, 死搬硬套.
+
