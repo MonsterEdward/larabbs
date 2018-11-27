@@ -15,7 +15,10 @@
     return view('welcome');
 });*/
 Route::get('/', 'PagesController@root')->name('root');
-//Auth::routes();
+//Auth::routes(); //为什么Auth::routes()就等同于这么多条路由?
+/*
+https://laravel-china.org/topics/9469/excuse-me-auth-routes-where-do-you-find-the-routes-that-are-extended-in-which-document-is-it-in
+*/
 //等同于
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

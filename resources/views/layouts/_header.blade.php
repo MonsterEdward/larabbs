@@ -10,7 +10,7 @@
 			</button>
 
 			{{-- Branding Image --}}
-			<a class="nvabar-brand" href="{{ url('/') }}">laraBBS</a>
+			<a class="navbar-brand" href="{{ url('/') }}">laraBBS</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="app-navbar-collapse">
