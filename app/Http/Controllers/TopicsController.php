@@ -16,8 +16,10 @@ class TopicsController extends Controller
 
 	public function index()
 	{
-		$topics = Topic::paginate();
-		return view('topics.index', compact('topics'));
+		// $topics = Topic::paginate(30);
+		// https://laravel-china.org/docs/laravel/5.4/eloquent-relationships/1265#eager-loading
+		$topics = Topic::with('user', 'category')->paginate(30);
+		return view('topics.index', compact('topics')); // 使用with()预加载关联属性user和category, 并做了缓存
 	}
 
     public function show(Topic $topic)
