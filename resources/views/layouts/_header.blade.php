@@ -37,6 +37,8 @@
 					</a>
 
 					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ route('users.show', Auth::id()) }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>User Center</a></li>
+
 						<li>
 							<a href="{{ route('users.edit', Auth::id()) }}">Edit Information</a>
 						</li>
