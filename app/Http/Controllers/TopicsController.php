@@ -14,12 +14,13 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index()
+	public function index(Request $request, Topic $topic)
 	{
 		 //$topics = Topic::paginate(30);
 		// https://laravel-china.org/docs/laravel/5.4/eloquent-relationships/1265#eager-loading
-		$topics = Topic::with('user', 'category')->paginate(30);
-		return view('topics.index', compact('topics')); // 使用with()预加载关联属性user和category, 并做了缓存
+		//$topics = Topic::with('user', 'category')->paginate(30); //使用with()预加载关联属性user和category, 并做了缓存
+		$topics = $topic->withOrder($request->order)->paginate(20); //使用了Topic模型中的本地作用域
+		return view('topics.index', compact('topics'));
 	}
 
     public function show(Topic $topic)

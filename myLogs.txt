@@ -4,3 +4,57 @@
 
 // routes/web.php中, Auth::routes()等同于那么多条路由? why?! 在config目录下app.php找出Auth aliases. 从来没读过框架, 所以很多不知道怎么回事, 死搬硬套.
 
+2. sass语法,
+@import "node_modules/bootstrap-sass/asssets/bootstrap/_alerts.scss" // 文件导入
+
+$navbar-color: #eee; // 定义变量
+
+body div {
+    color: red;
+}
+body h1 {
+    margin-top: 10px;
+}
+等同于, body { // 嵌套
+    div {
+        color: red;
+    }
+    h1 {
+        margin-top: 10px;
+    }
+}
+
+a {
+    color: black;
+}
+a:hover {
+    color: blue;
+}
+a {
+    color: black;
+    &:hover {   // &对父选择器引用
+        color: blue;
+    }
+}
+
+3. npm
+npm install // 依据package.json安装package
+npm install -f // 强制安装所有模块 
+cnmp install // 国内淘宝镜像
+npm run watch-poll
+
+4. yarn
+yarn install // yarn.lock
+yarn add packageName
+
+5. laravel Mix
+定义webpack编译任务, Mix支持许多常见的css和javascript预处理器
+let mix = require('laravel-mi') // require引用模块
+mix.js('resource/assets/js/app.js', 'public/js') // 第2个参数指定生成文件的输出目录
+mix.sass('resource/assets/sass/app.scss', 'public/css')
+
+6. Mix使用
+yarn install //  yarn install --save --no-bin-links
+npm run watch-poll // 去掉package.json中的cross-env
+
+
