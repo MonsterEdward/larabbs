@@ -9,22 +9,27 @@
     <title>@yield('title', 'laraBBS') -- I'll cross this bottomless pit</title>
 
     <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- 种下锚点styles --}}
+    @yield('styles')
 </head>
 <body>
-<div id="app" class="{{ route_class() }}-page">{{-- assets/sass/app.scss中对应的class --}}
+    <div id="app" class="{{ route_class() }}-page">{{-- assets/sass/app.scss中对应的class --}}
 
-    @include('layouts._header')
+        @include('layouts._header')
 
-    <div class="coutainer">
+        <div class="coutainer">
 
-		@include('layouts._message')
-        @yield('content') {{-- 这么粗心啊,看着报的错还看了3遍才发现 --}}
+            @include('layouts._message')
+            @yield('content') {{-- 这么粗心啊,看着报的错还看了3遍才发现 --}}
+
+        </div>
+
+        @include('layouts._footer')
 
     </div>
-
-    @include('layouts._footer')
-
-</div>
-<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    {{-- 种下锚点scripts --}}
+    @yield('scripts')
 </body>
 </html>
