@@ -9,6 +9,7 @@ use App\Http\Requests\TopicRequest; // 表单验证类
 
 use App\Models\Category;
 use Auth;
+use App\Handlers\ImageUploadHandler;
 
 class TopicsController extends Controller
 {
@@ -46,7 +47,7 @@ class TopicsController extends Controller
 		$topic->save();
 
 		//return redirect()->route('topics.show', $topic->id)->with('message', 'Created successfully.');
-		return redirect()->route('topics.show', $topic->id)->with('message', 'Created successfully.');
+		return redirect()->route('topics.show', $topic->id)->with('success', 'Created successfully.');
 	}
 
 	public function edit(Topic $topic)
@@ -60,7 +61,7 @@ class TopicsController extends Controller
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
 
-		return redirect()->route('topics.show', $topic->id)->with('message', 'Updated successfully.');
+		return redirect()->route('topics.show', $topic->id)->with('success', 'Updated successfully.');
 	}
 
 	public function destroy(Topic $topic)
@@ -68,6 +69,27 @@ class TopicsController extends Controller
 		$this->authorize('destroy', $topic);
 		$topic->delete();
 
-		return redirect()->route('topics.index')->with('message', 'Deleted successfully.');
+		return redirect()->route('topics.index')->with('success', 'Deleted successfully.');
+	}
+
+	// 与图像上传使用的是同一个ImageUploadHandler
+	public function uploadImage(Request $request, ImageUploadHandler $uploader) { // simditor上传文档, https://simditor.tower.im/docs/doc-config.html#anchor-upload
+		$data = [
+			'success' => false,
+			'msg' => '上传失败',
+			'file_path' => ''
+		];
+
+		if($file = $request->upload_file) {
+			$result = $uploader->save($request->upload_file, 'topics', \Auth::id(), 1024);
+
+			if($result) {
+				$data['file_path'] = $result['path'];
+				$data['msg'] = '上传成功';
+				$data['success'] = true;
+			}
+		}
+
+		return $data;
 	}
 }

@@ -7,6 +7,8 @@
     <meta name="csrf_token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'laraBBS') -- I'll cross this bottomless pit</title>
+    {{-- 利于SEO --}}
+    <meta name="description" content="@yidle('description', 'Lara 爱好者社区')">
 
     <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- 种下锚点styles --}}
@@ -27,7 +29,7 @@
         @include('layouts._footer')
 
     </div>
-    
+
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     {{-- 种下锚点scripts --}}
     @yield('scripts')
