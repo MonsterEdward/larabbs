@@ -28,8 +28,12 @@ class TopicsController extends Controller
 		return view('topics.index', compact('topics'));
 	}
 
-    public function show(Topic $topic)
+    public function show(Request $request, Topic $topic)
     {
+		// URL 301强制跳转
+		if(! empty($topic->slug) && $topic->slug != $request->slug) {
+			return redirect($topic->link(), 301);
+		}
         return view('topics.show', compact('topic'));
     }
 
@@ -47,13 +51,16 @@ class TopicsController extends Controller
 		$topic->save();
 
 		//return redirect()->route('topics.show', $topic->id)->with('message', 'Created successfully.');
-		return redirect()->route('topics.show', $topic->id)->with('success', 'Created successfully.');
+		//return redirect()->route('topics.show', $topic->id)->with('success', 'Created successfully.');
+        return redirect()->to($topic->link())->with('success', '成功创建话题！');
 	}
 
 	public function edit(Topic $topic)
 	{
-        $this->authorize('update', $topic);
-		return view('topics.create_and_edit', compact('topic'));
+		// policy使用机制? 无需引入命名空间?!
+		$this->authorize('update', $topic); // TopicPolicy限制, 当话题关联作者id与登录者id一致才放行
+		$categories = Category::all();
+		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
 	public function update(TopicRequest $request, Topic $topic)
@@ -61,12 +68,13 @@ class TopicsController extends Controller
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
 
-		return redirect()->route('topics.show', $topic->id)->with('success', 'Updated successfully.');
+		//return redirect()->route('topics.show', $topic->id)->with('success', 'Updated successfully.');
+        return redirect()->to($topic->link())->with('success', '成功修改话题！');
 	}
 
 	public function destroy(Topic $topic)
 	{
-		$this->authorize('destroy', $topic);
+		$this->authorize('destroy', $topic); // TopicPolicy使用?
 		$topic->delete();
 
 		return redirect()->route('topics.index')->with('success', 'Deleted successfully.');

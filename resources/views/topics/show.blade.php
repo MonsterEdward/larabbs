@@ -16,7 +16,7 @@
                 <hr>
                 <div class="media">
                     <div align="center">
-                        <a href="{{ route('users.show', $topic->user->id) }}">
+                        <a href="{{-- route('users.show', $topic->user->id) --}} {{ $topic->link() }}">
                             <img class="thumbnail img-response" src="{{ $topic->user->avatar }}" width="300px" height="300px">
                         </a>
                     </div>
@@ -45,15 +45,24 @@
                     {!! $topic->body !!}
                 </div>
 
-                <div class="operate">
-                    <hr>
-                    <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-default btn-xs" role="button">
-                        <i class="glyphicon glyphicon-edit"></i>编辑
-                    </a>
-                    <a href="###" class="btn btn-default btn-xs" role="button">
-                        <i class="glyphicon glyphicon-trash"></i>删除
-                    </a>
-                </div>
+                {{-- 对编辑/删除增加显示条件, 只有当用户有权限时显示. 使用laravel授权策略提供的@can Blade命令 --}}
+                @can('update', $topic)
+                    <div class="operate">
+                        <hr>
+                        <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-default btn-xs pull-left" role="button">
+                            <i class="glyphicon glyphicon-edit"></i> 编辑
+                        </a>
+
+                        <form action="{{ route('topics.destroy', $topic->id) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-default btn-xs pull-left" style="margin-left: 6px">
+                                <i class="glyphicon glyphicon-trash"></i>
+                                删除
+                            </button>
+                        </form>
+                    </div>
+                @endcan
 
             </div>
         </div>

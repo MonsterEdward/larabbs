@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function topics() { // User关联Topic
         return $this->hasMany(Topic::class); // 可用$user->topics获取用户发布的所有话题
     }
+
+    public function isAuthorOf($model) {
+        return $this->id == $model->user_id;
+    }
 }

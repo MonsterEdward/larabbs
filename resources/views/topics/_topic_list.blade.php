@@ -14,8 +14,8 @@
                     </a>
 
 					<div class="media-heading">
-						<a href="{{ route('topics.show', [$topic->id]) }}" title="{{ $topic->title }}">{{ $topic->title }}</a>
-						<a class="pull-right" href="{{ route('topics.show', [$topic->id]) }}"><span class="badge">{{ $topic->reply_count }}</span></a>
+						<a href="{{-- route('topics.show', [$topic->id]) --}} {{ $topic->link() }}" title="{{ $topic->title }}">{{ $topic->title }}</a>
+						<a class="pull-right" href="{{-- route('topics.show', [$topic->id]) --}} {{ $topic->link() }}"><span class="badge">{{ $topic->reply_count }}</span></a>
 					</div>
 
 					<div class="media-body meta">
@@ -25,7 +25,7 @@
 						{{-- 只顾着照着临摹, 自己写错了, 少写了, 写重了, 找了这么长时间! 如何排bug? --}}
 						<span> . </span>
 
-						<a href="{{ route('users.show', [$topic->user_id]) }}" title="{{ $topic->user->name }}">
+						<a href="{{-- route('users.show', [$topic->user_id]) --}} {{ $topic->link() }}" title="{{ $topic->user->name }}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             {{ $topic->user->name }}
                         </a>
