@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TopicRequest;
+use App\Http\Requests\TopicRequest; // 表单验证类
 
 use App\Models\Category;
 use Auth;
@@ -14,6 +14,7 @@ class TopicsController extends Controller
 {
     public function __construct()
     {
+		// 限制未登录用户发帖, 对除了index(), show()外的方法使用auth中间件认证
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
@@ -37,7 +38,7 @@ class TopicsController extends Controller
 		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
-	public function store(TopicRequest $request, Topic $topic) // TopicRequest的作用? how?
+	public function store(TopicRequest $request, Topic $topic) // 注入TopicRequest表单验证类
 	{
 		//$topic = Topic::create($request->all());
 		$topic->fill($request->all());

@@ -9,7 +9,7 @@ use App\Models\Topic;
 
 class TopicObserver
 {
-    public function creating(Topic $topic)
+    /*public function creating(Topic $topic)
     {
         //
     }
@@ -17,5 +17,11 @@ class TopicObserver
     public function updating(Topic $topic)
     {
         //
+    }*/
+
+    // https://laravel-china.org/docs/laravel/5.5/eloquent/1332#observers
+    public function saving(Topic $topic) { // 观察器, 已在AppServiceProvider中注册
+        // make_excerpt()是自定义的辅助方法, 需在helpers.php添加
+        $topic->excerpt = make_excerpt($topic->body);
     }
 }
