@@ -37,6 +37,10 @@
                     {{ $topic->reply_count }}
                 </div>
 
+                {{-- XSS攻击, https://www.ibm.com/developerworks/cn/rational/08/0325_segal/ --}}
+                {{-- blade模板会调用php中htmlspecialchars() --}}
+                {{-- 引用的simdior中js也会作转义过滤处理 --}}
+                {{-- 为了双保险, 使用HTMLPurifier对html文本进行XSS过滤, http://htmlpurifier.org/ --}}
                 <div class="topic-body">
                     {!! $topic->body !!}
                 </div>
