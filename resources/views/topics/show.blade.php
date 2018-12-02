@@ -70,7 +70,9 @@
         {{-- 用户回复列表 --}}
         <div class="panel panel-default topic-reply">
             <div class="panel-body">
-                @include('topics._reply_box', ['topic' => $topic])
+                {{-- @includeWhen($boolean, 'view.name', ['some' => 'data']) --}}
+                {{-- @include('topics._reply_box', ['topic' => $topic]) --}}
+                @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic])
                 {{-- 手误, 仅仅是临摹, 照抄照搬, 还写错这么多? 拼错, 写错... --}}
                 @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
             </div>

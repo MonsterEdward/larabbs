@@ -12,6 +12,10 @@ class ReplyObserver
     public function creating(Reply $reply)
     {
         //
+        $reply->topic->increment('reply_count', 1);
+
+        // 过滤XSS, 使用HTMLPurifier
+        $reply->content = clean($reply->content, 'user_topic_body');
     }
 
     public function updating(Reply $reply)
