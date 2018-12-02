@@ -38,6 +38,7 @@ class TranslateSlug implements ShouldQueue
         //
         $slug = app(SlugTranslateHandler::class)->translate($this->topic->title);
 
+        // why DB? https://laravel-china.org/courses/laravel-intermediate-training/5.5/using-queues/663
         \DB::table('topics')->where('id', $this->topic->id)->update(['slug' => $slug]);
     }
 }
