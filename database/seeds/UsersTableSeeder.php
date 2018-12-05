@@ -38,5 +38,12 @@ class UsersTableSeeder extends Seeder
         $user->email = '1910612833@qq.com';
         $user->avatar = 'https://lihuang.monsteredward.com/wp-content/uploads/2018/06/6739ba046017babed5850373266eaa52ab450cc041fea-zfHSvS_fw658.jpg';
         $user->save();
+
+        // 初始化用户角色, 把id为1的用户赋为站长
+        $user->assignRole('Founder');
+
+        // 把id为2的用户赋为管理员
+        $user = User::find(2);
+        $user->assignRole('Maintainer');
     }
 }

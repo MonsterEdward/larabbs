@@ -7,12 +7,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Auth;
 
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable
 {
     // use Notifiable;
     use Notifiable {
         notify as protected laravelNotify;
     }
+
+    // permission;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
