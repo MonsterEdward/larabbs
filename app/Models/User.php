@@ -9,7 +9,7 @@ use Auth;
 
 class User extends Authenticatable
 {
-    //use Notifiable;
+    // use Notifiable;
     use Notifiable {
         notify as protected laravelNotify;
     }
@@ -50,5 +50,11 @@ class User extends Authenticatable
         }
         $this->increment('notification_count');
         $this->laravelNotify($instance);
+    }
+
+    public function markAsRead() {
+        $this->notification_count = 0;
+        $this->save();
+        $this->unreadNotifications->markAsRead();
     }
 }
