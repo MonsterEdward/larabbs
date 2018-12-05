@@ -69,6 +69,7 @@ class RepliesController extends Controller
 		$reply->delete();
 
 		// 为什么总是临摹? 不能自己动手写一些玩意跑跑吗? 不动脑? 光看不练, 就能学会游泳了?
-		return redirect()->route('replies.index')->with('message', '删除成功!'/*'Deleted successfully.'*/);
+		//return redirect()->route('replies.index')->with('message', '删除成功!'/*'Deleted successfully.'*/);
+		return redirect()->to($reply->topic->link())-with('success', '成功删除回复!');
 	}
 }
