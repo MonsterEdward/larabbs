@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-use Illuminate\Database\Eloqument\Model;
+
+use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloqument\Model; // 又手误, 拼错单词
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
