@@ -30,6 +30,11 @@
 
     </div>
 
+    @if(app()->isLocal())
+        {{-- 又拼错了, 手误 --}}
+        @include('sudosu::user-selector')
+    @endif
+
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     {{-- 种下锚点scripts --}}
     @yield('scripts')
