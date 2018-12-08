@@ -4,11 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    {{-- csrf token --}}
     <meta name="csrf_token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'laraBBS') -- I'll cross this bottomless pit</title>
+    {{-- <title>@yield('title', 'laraBBS') -- I'll cross this bottomless pit</title> --}}
     {{-- 利于SEO --}}
-    <meta name="description" content="@yidle('description', 'Lara 爱好者社区')">
+    {{-- <meta name="description" content="@yidle('description', 'Laravel临摹')"> --}}
+
+    {{-- 用于Administrator里关于SEO的配置 --}}
+    <title>@yield('title', 'LaraBBS') - {{ setting('site_name', 'I will cross this bottomless pit') }}</title>
+    <meta name="description" content="@yield('description', setting('seo_description', 'Laravel临摹'))" />
+    <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'LaraBBS,laravel,learning'))" />
 
     <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- 种下锚点styles --}}
