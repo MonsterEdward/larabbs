@@ -5,7 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     {{-- csrf token --}}
-    <meta name="csrf_token" content="{{ csrf_token() }}">
+    {{-- csrf-token错写成csrf_token --}}
+    {{-- <meta name="csrf_token" content="{{ csrf_token() }}"> --}}
+    {{--
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>@yield('title', 'laraBBS') -- I'll cross this bottomless pit</title> --}}
     {{-- 利于SEO --}}
