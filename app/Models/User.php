@@ -62,4 +62,25 @@ class User extends Authenticatable
         $this->save();
         $this->unreadNotifications->markAsRead();
     }
+
+    // https://laravel-china.org/docs/laravel/5.5/eloquent-mutators/1335
+    public function setPasswordAttribute($value) {
+        // 如果长度=60, 即认为是已做过加密
+        if(strlen($value) != 60) {
+            // !=60, 做密码加密处理
+            $value = bcrypt($value);
+        }
+
+        //$this->attributes['password'] = bcrypt($value);
+        $this->attributes['password'] = $value; // 粗心
+    }
+
+    public function setAvatarAttribute($path) {
+        // 如果不是`http`开头, 就是从admin后台传上去的, 需补全url
+        if(! starts_with($path, 'http')) {
+            // 拼接完整的url
+            $path = config('app.url') . "/uploads/images/avatars/$path";
+        }
+        $this->attributes['avatar'] = $path;
+    }
 }
