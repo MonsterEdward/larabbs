@@ -10,6 +10,7 @@ use App\Http\Requests\TopicRequest; // 表单验证类
 use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
+use App\Models\User;
 
 class TopicsController extends Controller
 {
@@ -19,13 +20,15 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index(Request $request, Topic $topic)
+	public function index(Request $request, Topic $topic, User $user)
 	{
 		 //$topics = Topic::paginate(30);
 		// https://laravel-china.org/docs/laravel/5.4/eloquent-relationships/1265#eager-loading
 		//$topics = Topic::with('user', 'category')->paginate(30); //使用with()预加载关联属性user和category, 并做了缓存
 		$topics = $topic->withOrder($request->order)->paginate(20); //使用了Topic模型中的本地作用域
-		return view('topics.index', compact('topics'));
+
+		$active_users = $user->getActiveUsers();
+		return view('topics.index', compact('topics', 'active_users')); // 不知道传active_users数据到blade
 	}
 
     public function show(Request $request, Topic $topic)
