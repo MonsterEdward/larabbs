@@ -45,6 +45,7 @@ Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit'
 // laravel隐形路由绑定, https://laravel-china.org/docs/laravel/5.5/routing/1293#%E9%9A%90%E5%BC%8F%E7%BB%91%E5%AE%9A
 //Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
+
 // ?意味着参数可选
 Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show'); // 隐性路由绑定, https://laravel-china.org/docs/laravel/5.5/routing/1293#%E9%9A%90%E5%BC%8F%E7%BB%91%E5%AE%9A
 

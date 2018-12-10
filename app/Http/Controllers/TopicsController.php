@@ -11,6 +11,7 @@ use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\User;
+use App\Models\Link;
 
 class TopicsController extends Controller
 {
@@ -20,15 +21,17 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index(Request $request, Topic $topic, User $user)
+	public function index(Request $request, Topic $topic, User $user, Link $link)
 	{
 		 //$topics = Topic::paginate(30);
 		// https://laravel-china.org/docs/laravel/5.4/eloquent-relationships/1265#eager-loading
 		//$topics = Topic::with('user', 'category')->paginate(30); //使用with()预加载关联属性user和category, 并做了缓存
 		$topics = $topic->withOrder($request->order)->paginate(20); //使用了Topic模型中的本地作用域
+		$active_users = $user->getActiveUsers(); // 继续这种排bug的推理
 
-		$active_users = $user->getActiveUsers();
-		return view('topics.index', compact('topics', 'active_users')); // 不知道传active_users数据到blade
+		$links = $link->getAllCached();
+
+		return view('topics.index', compact('topics', 'active_users', 'links')); // 不知道传active_users数据到blade
 	}
 
     public function show(Request $request, Topic $topic)
