@@ -130,7 +130,8 @@ body {
 
 
 /* Topic Index Page*/
-.topics-index-page, categories-show-page {
+/* 样式有些问题，那是因为我们的话题列表页面是使用『路由专属样式类』区分的，新增路由样式类到原有的样式上即可 */
+.topics-index-page, categories-show-page, .root-page {
     .topic-list {
         .nav > li > a {
             position: relative;

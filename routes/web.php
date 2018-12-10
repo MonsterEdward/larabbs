@@ -14,7 +14,9 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', 'PagesController@root')->name('root');
+// Route::get('/', 'PagesController@root')->name('root');
+Route::get('/', 'TopicsController@index')->name('root'); // 使用话题列表渲染首页, 避免首页是空白. 样式有些问题，那是因为我们的话题列表页面是使用『路由专属样式类』区分的，新增路由样式类到原有的样式上即可
+
 //Auth::routes(); //为什么Auth::routes()就等同于这么多条路由?
 /*
 https://laravel-china.org/topics/9469/excuse-me-auth-routes-where-do-you-find-the-routes-that-are-extended-in-which-document-is-it-in
