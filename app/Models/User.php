@@ -13,6 +13,9 @@ class User extends Authenticatable
 {
     // 计算活跃用户trait
     use Traits\ActiveUserHelper;
+
+    // 最后登录时间trait
+    use Traits\LastActivedAtHelper;
     
     // use Notifiable;
     use Notifiable {

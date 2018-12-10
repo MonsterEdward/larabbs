@@ -6,23 +6,21 @@ use Illuminate\Console\Command;
 
 use App\Models\User;
 
-class CalculateActiveUser extends Command
+class SyncUserActivedAt extends Command
 {
-    // 生成artisan命令的指令, php artisan make:command SyncUserActivedAt --command=larabbs:sync-user-actived-at
-
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'larabbs:calculate-active-user';
+    protected $signature = 'larabbs:sync-user-actived-at';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '生成活跃用户';
+    protected $description = '将用户最后登录时间从Redis同步到数据库';
 
     /**
      * Create a new command instance.
@@ -41,9 +39,7 @@ class CalculateActiveUser extends Command
      */
     public function handle(User $user)
     {
-        // 在命令行打印一行信息
-        $this->info('开始计算...');
-        $user->calculateAndCacheActiveUsers();
-        $this->info('成功生成!');
+        $user->syncUserActivedAt();
+        $this->info('同步成功!');
     }
 }

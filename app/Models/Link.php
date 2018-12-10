@@ -13,6 +13,9 @@ php artisan migrate // 使用生成的迁移文件create table
 php artisan make:factory LinkFactory // 生成数据工厂文件
 php artisan make:seeder LinksTableSeeder // 生成假数据填充文件. 之后需将生成的假数据填充文件注册到DatabaseSeeder
 
+php artisan make:migration add_last_actived_at_to_users_table --table=users // 修改`users`表字段
+php artisan make:migration add_references
+
 php artisan migrate:refresh --seed // 刷新数据库, 然后重新生成数据
 
 */
