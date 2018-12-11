@@ -82,7 +82,7 @@ class User extends Authenticatable
     }
 
     public function setAvatarAttribute($path) {
-        // 如果不是`http`开头, 就是从admin后台传上去的, 需补全url
+        // 如果不是`http`开头, 就是从admin后台传上去的, 需补全url. 忘了怎么处理的...
         if(! starts_with($path, 'http')) {
             // 拼接完整的url
             $path = config('app.url') . "/uploads/images/avatars/$path";
